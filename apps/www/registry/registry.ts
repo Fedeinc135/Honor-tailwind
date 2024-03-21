@@ -607,6 +607,13 @@ const example: Registry = [
     dependencies: ["date-fns"],
   },
   {
+    name: "date-picker-input",
+    type: "components:example",
+    registryDependencies: ["button", "calendar", "input", "popover", "select"],
+    files: ["example/date-picker-input.tsx"],
+    dependencies: ["date-fns"],
+  },
+  {
     name: "date-picker-with-range",
     type: "components:example",
     registryDependencies: ["button", "calendar", "popover"],
