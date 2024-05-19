@@ -1,0 +1,132 @@
+---
+title: Tour
+description: An overlay that outlines provided refs for touring an application.
+component: true
+---
+
+<ComponentPreview name="tour-demo" description="A tooltip component." />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ui@latest add tour
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="tour" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx filename="tour.tsx"
+import { TourFactory } from "@/registry/new-york/ui/tour"
+
+const tour = TourFactory([
+  "buttonOne",
+  "buttonTwo",
+  "missingButton",
+  "buttonFour",
+])
+
+export default tour
+```
+
+```tsx filename="app.tsx"
+import tour from "./tourApp.tsx"
+
+const TourApplication = () => {
+  const ctx = tour.useContext()
+  return (
+    <>
+      <tour.TourFocus
+        name="buttonOne"
+        tourRender={() => (
+          <div className="flex flex-col">
+            <h1>My Button One</h1>
+            <div className="flex">
+              <Button onClick={ctx.previous}>Previous</Button>
+              <Button onClick={ctx.next}>Next</Button>
+            </div>
+            <div className="relative right-0 top-0">
+              <Button onClick={ctx.close}>X</Button>
+            </div>
+          </div>
+        )}
+      >
+        <Button>One</Button>
+      </tour.TourFocus>
+      <tour.TourFocus
+        name="buttonTwo"
+        tourRender={() => (
+          <div className="flex flex-col">
+            <h1>My Button One</h1>
+            <div className="flex">
+              <Button onClick={ctx.previous}>Previous</Button>
+              <Button onClick={ctx.next}>Next</Button>
+            </div>
+            <div className="relative right-0 top-0">
+              <Button onClick={ctx.close}>X</Button>
+            </div>
+          </div>
+        )}
+      >
+        <Button>One</Button>
+      </tour.TourFocus>
+      <tour.TourFocus
+        name="buttonFour"
+        tourRender={() => (
+          <div className="flex flex-col">
+            <h1>My Button One</h1>
+            <div className="flex">
+              <Button onClick={ctx.previous}>Previous</Button>
+              <Button onClick={ctx.next}>Next</Button>
+            </div>
+            <div className="relative right-0 top-0">
+              <Button onClick={ctx.close}>X</Button>
+            </div>
+          </div>
+        )}
+      >
+        <Button>One</Button>
+      </tour.TourFocus>
+      <Button onClick={ctx.open}>Open Tour</Button>
+    </>
+  )
+}
+
+export default TourApplication
+```
+
+```tsx filename="index.tsx"
+import TourApplication from "./tourApp.tsx"
+
+export default function TourDemo() {
+  return (
+    <tour.TourProvider>
+      <TourApplication />
+    </tour.TourProvider>
+  )
+}
+```
